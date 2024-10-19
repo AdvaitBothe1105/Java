@@ -20,6 +20,9 @@ class Employee
 		Employee e=new Employee("Tejas","Kurla",2018,200000);
 		Employee e1=new Employee("Manoj","Nerul",2013,300000);
 		Employee e2=new Employee("Tejas","Mumbai C",2018,200000);
+		e.display_info();
+        	e1.display_info();
+        	e2.display_info();
 		
 	}
 }
