@@ -3,8 +3,8 @@ pipeline {
   stages {
     stage('maven install') {
       steps {
-                 withMaven {
-              sh 'mvn clean install'
+                          withMaven(globalMavenSettingsConfig: '', jdk: '', maven: 'maven1', mavenSettingsConfig: '', traceability: true) {
+              // some block
           }
       }
     }
