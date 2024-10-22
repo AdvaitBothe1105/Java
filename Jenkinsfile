@@ -22,18 +22,8 @@ pipeline {
                 sh 'mvn test'
             }
         }
-        stage('Archive') {
-            steps {
-                // Archive the build artifacts (e.g., .jar, .war files)
-                archiveArtifacts artifacts: '**/target/*.jar', allowEmptyArchive: true
-            }
-        }
     }
     post {
-        always {
-            // Publish test results
-            junit '**/target/surefire-reports/*.xml'
-        }
         success {
             echo 'Build successful!'
         }
