@@ -4,7 +4,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout the source code from Git
-                git 'https://github.com/your-repo/java-app.git'
+                git 'https://github.com/AdvaitBothe1105/Java.git'
             }
         }
         stage('Build') {
