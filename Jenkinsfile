@@ -16,7 +16,10 @@ pipeline {
         stage('Test') {
             steps {
                 // Run the unit tests
-                sh 'mvn test'
+                dir('maven-example') {
+                    // Use Maven to build the project
+                    sh 'mvn clean install'
+                }
             }
         }
         stage('Archive') {
