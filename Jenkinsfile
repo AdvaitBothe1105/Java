@@ -10,16 +10,16 @@ pipeline {
         stage('Build') {
             steps {
                 // Use Maven to clean and build the Java project
-                sh 'mvn clean install'
+                dir('Maven-Example') {
+                    // Use Maven to build the project
+                    sh 'mvn clean install'
+                }
             }
         }
         stage('Test') {
             steps {
                 // Run the unit tests
-                dir('Maven-Example') {
-                    // Use Maven to build the project
-                    sh 'mvn clean install'
-                }
+                sh 'mvn test'
             }
         }
         stage('Archive') {
