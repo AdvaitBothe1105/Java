@@ -1,13 +1,41 @@
 pipeline {
-  agent any
-  stages {
-    stage('maven install') {
-      steps {
-                          withMaven(globalMavenSettingsConfig: '', jdk: '', maven: 'maven1', mavenSettingsConfig: '', traceability: true) {
-              // some block
-          }
-      }
+    agent any
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout the source code from Git
+                git 'https://github.com/your-repo/java-app.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                // Use Maven to clean and build the Java project
+                sh 'mvn clean install'
+            }
+        }
+        stage('Test') {
+            steps {
+                // Run the unit tests
+                sh 'mvn test'
+            }
+        }
+        stage('Archive') {
+            steps {
+                // Archive the build artifacts (e.g., .jar, .war files)
+                archiveArtifacts artifacts: '**/target/*.jar', allowEmptyArchive: true
+            }
+        }
     }
-
-  }
+    post {
+        always {
+            // Publish test results
+            junit '**/target/surefire-reports/*.xml'
+        }
+        success {
+            echo 'Build successful!'
+        }
+        failure {
+            echo 'Build failed!'
+        }
+    }
 }
